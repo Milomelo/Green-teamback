@@ -1,0 +1,27 @@
+{{> /layout/header}}
+
+<!-- 컨테이너 시작 -->
+<div class="container mt-3">
+
+    <!-- 로그인 폼 시작 -->
+    <div class="box-form1">
+        <div class="box-form2">
+            <div class="my-2 brand-logo">
+                글하다
+            </div>
+            <form action="/s/category" method="post">
+                <div class="my-2">
+                    <input type="text" class="form-control input-form" placeholder="카테고리명" name="title" />
+                </div>
+                <div class="my-3">
+                    <button type="submit" class="submit-btn">등록</button>
+                </div>
+        </div>
+        <!-- 로그인 폼 끝 -->
+
+    </div>
+
+
+    <!-- 컨테이너 끝 -->
+
+    {{> /layout/footer}}
