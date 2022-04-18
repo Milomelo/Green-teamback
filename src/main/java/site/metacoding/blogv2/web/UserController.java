@@ -19,7 +19,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.domain.user.UserRepository;
+import site.metacoding.blogv2.service.PostService;
 import site.metacoding.blogv2.service.UserService;
+<<<<<<< HEAD
+=======
+import site.metacoding.blogv2.web.Dto.ImgDto;
+import site.metacoding.blogv2.web.Dto.PostRespDto;
+>>>>>>> 02146f8f1d9ace3ce4db249db72516b1f0cd5317
 
 @RequiredArgsConstructor
 @Controller
@@ -27,6 +33,7 @@ public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
     private final HttpSession session;
+    private final PostService postService;
 
     // 메인
     @GetMapping("/")
@@ -112,15 +119,31 @@ public class UserController {
     @GetMapping("/s/user/my-blog/{userId}")
     public String myBlog(@PathVariable Integer userId, Model model) {
         User userEntity = userService.회원정보(userId);
+        PostRespDto postRespDto = postService.게시글목록보기(userId);
+        model.addAttribute("postRespDto", postRespDto);
         model.addAttribute("user", userEntity);
         return "/user/myBlog";
     }
 
+<<<<<<< HEAD
     @GetMapping("/user/blog/{userId}")
     public String Blog(@PathVariable Integer userId, Model model) {
         User userEntity = userService.회원정보(userId);
         model.addAttribute("user", userEntity);
         return "/user/Blog";
+=======
+    // 카테고리
+    @GetMapping("/user/{id}/post")
+    public String postList(@PathVariable Integer id, Model model) {
+
+        // SELECT * FROM category WHERE userId = :id
+        // 카테고리 가져가세요!!
+        PostRespDto postRespDto = postService.게시글목록보기(id);
+        model.addAttribute("postRespDto", postRespDto);
+        System.out.println(postRespDto);
+        System.out.println("=========postlist입니다=======================");
+        return "/post/list";
+>>>>>>> 02146f8f1d9ace3ce4db249db72516b1f0cd5317
     }
 
     // 일반 블로그 연결

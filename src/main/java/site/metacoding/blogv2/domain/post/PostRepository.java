@@ -1,5 +1,7 @@
 package site.metacoding.blogv2.domain.post;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,4 +17,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query(value = "SELECT * FROM post WHERE userId = :userId AND title like %:mykeyword%", nativeQuery = true)
     Page<Post> mfindByUserID(@Param("userId") Integer userId, @Param("mykeyword") String mykeyword, Pageable pageable);
 
+    @Query(value = "SELECT * FROM post WHERE userId = :userId", nativeQuery = true)
+    List<Post> findByUserId(@Param("userId") Integer userId);
 }

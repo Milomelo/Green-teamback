@@ -1,5 +1,6 @@
 package site.metacoding.blogv2.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -8,15 +9,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.blogv2.domain.category.Category;
+import site.metacoding.blogv2.domain.category.CategoryRepository;
 import site.metacoding.blogv2.domain.post.Post;
 import site.metacoding.blogv2.domain.post.PostRepository;
 import site.metacoding.blogv2.domain.user.User;
+import site.metacoding.blogv2.web.Dto.PostRespDto;
 
 @RequiredArgsConstructor
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
+    private final CategoryRepository categoryRepository;
 
     @Transactional
     public void 글쓰기(Post post, User principal) {
@@ -26,6 +31,14 @@ public class PostService {
 
     public Page<Post> 글목록보기(String keyword, Pageable pageable) {
         return postRepository.findByTitleContaining(keyword, pageable);
+    }
+
+    public PostRespDto 게시글목록보기(int userId) {
+        List<Post> postsEntity = postRepository.findByUserId(userId);
+        List<Category> categorysEntity = categoryRepository.findByUserId(userId);
+
+        PostRespDto postRespDto = new PostRespDto(postsEntity, categorysEntity);
+        return postRespDto;
     }
 
     public Post 글상세보기(Integer id) {
