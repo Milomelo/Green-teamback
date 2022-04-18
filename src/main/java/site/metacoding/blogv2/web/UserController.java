@@ -140,6 +140,13 @@ public class UserController {
         return "/user/myBlog";
     }
 
+    @GetMapping("/user/blog/{userId}")
+    public String Blog(@PathVariable Integer userId, Model model) {
+        User userEntity = userService.회원정보(userId);
+        model.addAttribute("user", userEntity);
+        return "/user/Blog";
+    }
+
     // 일반 블로그 연결
     @GetMapping("/user/other-blog/{userId}")
     public String otherBlog(@PathVariable Integer userId, Model model) {

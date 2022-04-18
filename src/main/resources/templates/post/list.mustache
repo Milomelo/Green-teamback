@@ -101,15 +101,16 @@
 
   function postItemRender(post) {
     return `
-    <div class= "col-3 card">
+    <div class= "col-3 card" style="cursor: pointer;" onclick="location.href='/user/other-blog/${post.user.id}';" >
       <img class="card-img-top" src="/image/Very_Peri.jpg" alt="Card image" >
       <div class="card-body">
-        <h4 class="card-title"> <a href="/post/${post.id}">${post.title}</a></h4>
-        <p class="card-text"> <a href="/post/${post.id}">${post.content}</a></p>
+        <h4 class="card-title">${post.title}</h4>
+        <p class="card-text">${post.content}</p>
         <p>작성일 · 댓글수</p>
         <div class="card-profile">
           <a href="#" class="card-link my-link"><img src="/image/coomon.jpg" class="rounded-circle card-img-profile" alt="Card image"> by suhyeon5028</a>
-   <i id="Like-btn${post.id}" class="far fa-heart m_set_pointer" onclick="like()"></i>
+          <button>
+			</button>
         </div>        
       </div>
     </div>`;
@@ -129,6 +130,8 @@
   }
 
   list("");
+
+
 
 </script>
 

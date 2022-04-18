@@ -25,7 +25,7 @@ public class PostApiController {
             @PageableDefault(size = 9, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<Post> posts = postService.글목록보기(keyword, pageable);
-
+        System.out.println(posts);
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
