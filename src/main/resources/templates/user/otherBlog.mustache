@@ -1,0 +1,184 @@
+{{> /layout/header}}
+
+<!-- 컨테이너 시작 -->
+<div class="container">
+
+  <!-- 블로그 폼 시작 -->
+  <div>
+
+    <!-- 블로그 맨 위 소개 시작-->
+    <div class="blog-flex-center">
+      <div class="col-sm-6">
+        <div class="blog-flex-start blog-profile">
+          <div class="my-mlr blog-profile-img">
+            <img src="/image/coomon.jpg" alt="Profile" class="rounded-circle profile">
+          </div>
+          <div class="my-mlr">
+            {{#user}}
+            <div class="blog-user">{{blogname}}</div>
+            <div>{{blogtitle}}</div>
+            <div>{{username}}</div>
+            {{/user}}
+          </div>
+        </div>
+        <hr />
+      </div>
+    </div>
+    <!-- 블로그 맨 위 소개 끝-->
+
+    <!-- 블로그 내 검색 시작-->
+    <form class="d-flex justify-content-end">
+      <input id="mykeyword" name="mykeyword" class="me-2" type="text" placeholder="Search">
+      <button id="mybtn-search" class="btn btn-primary" type="button">검색</button>
+    </form>
+    <!-- 블로그 내 검색 끝-->
+
+    <!-- 블로그 본문 시작-->
+    <div class="row my-mtb blog-flex-around">
+
+      <!-- 블로그 카테고리 시작-->
+      <div class="col-sm-3 blog-flex-end">
+        <div class="blog-category">
+          <div>&nbsp;&nbsp;&nbsp;카테고리 목록</div>
+          <hr />
+          <div>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action">팀장</a>
+              <a href="#" class="list-group-item list-group-item-action">임현조</a>
+              <a href="#" class="list-group-item list-group-item-action">비선실세</a>
+              <a href="#" class="list-group-item list-group-item-action">고아라</a>
+              <a href="#" class="list-group-item list-group-item-action">그냥</a>
+              <a href="#" class="list-group-item list-group-item-action">김수현</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 블로그 카테고리 끝-->
+
+      <!-- 블로그 포스트 시작-->
+      <input type="hidden" id="userId" value="{{userId}}">
+      <div class="col-sm-6" id="post-box">
+
+
+
+      </div>
+      <!-- 블로그 포스트 끝-->
+
+      <!-- 블로그 빈칸 시작-->
+      <div class="col-sm-3 blog-box"></div>
+      <!-- 블로그 빈칸 끝-->
+
+    </div>
+    <!-- 블로그 본문 끝-->
+
+    <!-- 페이징 시작 -->
+    <ul class="pagination modal-3">
+      <li><a href="#" class="prev"><i class="fa fa-chevron-left"></i></a></li>
+      <li><a href="#" class="active">1</a></li>
+      <li> <a href="#">2</a></li>
+      <li> <a href="#">3</a></li>
+      <li> <a href="#">4</a></li>
+      <li> <a href="#">5</a></li>
+      <li> <a href="#">6</a></li>
+      <li> <a href="#">7</a></li>
+      <li> <a href="#">8</a></li>
+      <li> <a href="#">9</a></li>
+      <li><a href="#" class="next"><i class="fa fa-chevron-right"></i></a></li>
+    </ul>
+    <!-- 페이징 끝 -->
+
+  </div>
+  <!-- 블로그 폼 끝 -->
+
+</div>
+<!-- 컨테이너 끝 -->
+
+
+<script>
+  let page = 0;
+  let mykeyword = $("#mykeyword").val(""); // 초기화
+  let userId = $("#userId").val();
+
+  // 이전버튼 이벤트
+  $("#btn-prev").click(() => {
+    page--;
+    // console.log("현재 페이지 : " + page);
+
+    $("#post-box").empty();
+    let mykeyword = $("#mykeyword").val(); // 키워드 가지고 가야함
+
+    list(mykeyword);
+  });
+
+  // 다음버튼 이벤트
+  $("#btn-next").click(() => {
+    page++;
+    // console.log("현재 페이지 : " + page);
+
+    $("#post-box").empty();
+    let mykeyword = $("#mykeyword").val();
+
+    list(mykeyword);
+  });
+
+  // 검색버튼 이벤트
+  $("#mybtn-search").click(() => {
+    page = 0; // 페이지 초기화 검색한 페이지가 0번!
+
+    mykeyword = $("#mykeyword").val();
+    $("#post-box").empty();
+
+    list(mykeyword);
+  });
+
+  async function list(mykeyword) {
+
+    let response = await fetch(`/api/${userId}/list?page=${page}&mykeyword=${mykeyword}`);
+    let responseParse = await response.json();
+
+    console.log(responseParse);
+    console.log(responseParse.first);
+
+    if (response.status === 200) {
+      pagingDisabled(responseParse);
+
+      responseParse.content.forEach((post) => {
+        $("#post-box").append(postItemRender(post));
+      });
+    } else {
+      alert("잘못된 요청입니다.");
+    }
+  }
+
+  function postItemRender(post) {
+    return `<div class="my-mb blog-flex-center">
+            <div class="blog-card">
+                <img class="card-img-top" src="/image/Very_Peri.jpg" alt="Card image">
+                    <div class="card-body">
+                        <h4 class="card-title" ><a href="/post/${post.id}"> ${post.title}</h4>
+                        <p class="card-text">${post.content}</p>
+                        <p>작성일 · 댓글수</p>
+                    </div>
+            </div>
+        </div>`;
+
+
+  }
+
+  function pagingDisabled(responseParse) {
+    if (responseParse.first == true) {
+      $("#li-prev").addClass("disabled");
+      $("#li-next").removeClass("disabled");
+    } else if (responseParse.last == true) {
+      $("#li-prev").removeClass("disabled");
+      $("#li-next").addClass("disabled");
+    } else {
+      $("#li-prev").removeClass("disabled");
+      $("#li-next").removeClass("disabled");
+    }
+  }
+
+  list("");
+
+</script>
+{{> /layout/footer}}

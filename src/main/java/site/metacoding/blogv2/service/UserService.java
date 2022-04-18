@@ -35,6 +35,12 @@ public class UserService {
         }
     }
 
+    public User 회원아이디불러오기(Integer id) {
+        Optional<User> userOp = userRepository.findById(id);
+
+        return userOp.get();
+    }
+
     @Transactional
     public void 회원수정(Integer id, UpdateDto updateDto) {
         // UPDATE user SET password = ?, email = ?, addr = ? WHERE id = ?

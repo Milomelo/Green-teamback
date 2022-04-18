@@ -8,101 +8,101 @@
     <ul class="nav nav-tabs ">
       <li class="active">
         <a href="#tab_default_1" data-toggle="tab" class="active-tab">
-        인기순</a>
+          인기순</a>
       </li>
       <li>
         <a href="#tab_default_2" data-toggle="tab" class="active-tab">
-        최신순</a>
+          최신순</a>
       </li>
     </ul>
   </div>
   <!-- 탭 끝 -->
 
-    <!-- 게시글 아이템 시작 -->
+  <!-- 게시글 아이템 시작 -->
   <div class="row d-flex justify-content-between" id="post-box">
 
 
-</div>
-    <!-- 게시글 아이템 끝 -->
+  </div>
+  <!-- 게시글 아이템 끝 -->
 
-    <!-- 페이징 시작 -->
-    <ul class="pagination modal-3">
-      <li><a href="#" class="prev"><i class="fa fa-chevron-left"></i></a></li>
-      <li><a href="#" class="active">1</a></li>
-      <li> <a href="#">2</a></li>
-      <li> <a href="#">3</a></li>
-      <li> <a href="#">4</a></li>
-      <li> <a href="#">5</a></li>
-      <li> <a href="#">6</a></li>
-      <li> <a href="#">7</a></li>
-      <li> <a href="#">8</a></li>
-      <li> <a href="#">9</a></li>
-      <li><a href="#" class="next"><i class="fa fa-chevron-right"></i></a></li>
-    </ul>
-    <!-- 페이징 끝 -->
+  <!-- 페이징 시작 -->
+  <ul class="pagination modal-3">
+    <li><a href="#" class="prev"><i class="fa fa-chevron-left"></i></a></li>
+    <li><a href="#" class="active">1</a></li>
+    <li> <a href="#">2</a></li>
+    <li> <a href="#">3</a></li>
+    <li> <a href="#">4</a></li>
+    <li> <a href="#">5</a></li>
+    <li> <a href="#">6</a></li>
+    <li> <a href="#">7</a></li>
+    <li> <a href="#">8</a></li>
+    <li> <a href="#">9</a></li>
+    <li><a href="#" class="next"><i class="fa fa-chevron-right"></i></a></li>
+  </ul>
+  <!-- 페이징 끝 -->
 
 </div>
 
 <script>
-    let page = 0;
-    let keyword = $("#keyword").val(""); // 초기화
+  let page = 0;
+  let keyword = $("#keyword").val(""); // 초기화
 
-    // 이전버튼 이벤트
-    $("#btn-prev").click(() => {
-        page--;
-        // console.log("현재 페이지 : " + page);
+  // 이전버튼 이벤트
+  $("#btn-prev").click(() => {
+    page--;
+    // console.log("현재 페이지 : " + page);
 
-        $("#post-box").empty();
-        let keyword = $("#keyword").val(); // 키워드 가지고 가야함
+    $("#post-box").empty();
+    let keyword = $("#keyword").val(); // 키워드 가지고 가야함
 
-        list(keyword);
-    });
+    list(keyword);
+  });
 
-    // 다음버튼 이벤트
-    $("#btn-next").click(() => {
-        page++;
-        // console.log("현재 페이지 : " + page);
+  // 다음버튼 이벤트
+  $("#btn-next").click(() => {
+    page++;
+    // console.log("현재 페이지 : " + page);
 
-        $("#post-box").empty();
-        let keyword = $("#keyword").val();
+    $("#post-box").empty();
+    let keyword = $("#keyword").val();
 
-        list(keyword);
-    });
+    list(keyword);
+  });
 
-    // 검색버튼 이벤트
-    $("#btn-search").click(() => {
-        page = 0; // 페이지 초기화 검색한 페이지가 0번!
+  // 검색버튼 이벤트
+  $("#btn-search").click(() => {
+    page = 0; // 페이지 초기화 검색한 페이지가 0번!
 
-        keyword = $("#keyword").val();
-        $("#post-box").empty();
+    keyword = $("#keyword").val();
+    $("#post-box").empty();
 
-        list(keyword);
-    });
+    list(keyword);
+  });
 
-    async function list(keyword) {
-        // alert(page);
+  async function list(keyword) {
+    // alert(page);
 
-        let response = await fetch(`/api/list?page=${page}&keyword=${keyword}`);
-        let responseParse = await response.json();
+    let response = await fetch(`/api/list?page=${page}&keyword=${keyword}`);
+    let responseParse = await response.json();
 
-        console.log(responseParse);
-        console.log(responseParse.first);
+    console.log(responseParse);
+    console.log(responseParse.first);
 
-        if (response.status === 200) {
-            pagingDisabled(responseParse);
+    if (response.status === 200) {
+      pagingDisabled(responseParse);
 
-            responseParse.content.forEach((post) => {
-                $("#post-box").append(postItemRender(post));
-            });
-        } else {
-            alert("잘못된 요청입니다.");
-        }
+      responseParse.content.forEach((post) => {
+        $("#post-box").append(postItemRender(post));
+      });
+    } else {
+      alert("잘못된 요청입니다.");
     }
+  }
 
-    function postItemRender(post) {
-        return `
+  function postItemRender(post) {
+    return `
     <div class= "col-3 card">
-      <img class="card-img-top" src="/image/Very_Peri.jpg" alt="Card image">
+      <img class="card-img-top" src="/image/Very_Peri.jpg" alt="Card image" >
       <div class="card-body">
         <h4 class="card-title"> <a href="/post/${post.id}">${post.title}</a></h4>
         <p class="card-text"> <a href="/post/${post.id}">${post.content}</a></p>
@@ -113,22 +113,22 @@
         </div>        
       </div>
     </div>`;
-    }
+  }
 
-    function pagingDisabled(responseParse) {
-        if (responseParse.first == true) {
-            $("#li-prev").addClass("disabled");
-            $("#li-next").removeClass("disabled");
-        } else if (responseParse.last == true) {
-            $("#li-prev").removeClass("disabled");
-            $("#li-next").addClass("disabled");
-        } else {
-            $("#li-prev").removeClass("disabled");
-            $("#li-next").removeClass("disabled");
-        }
+  function pagingDisabled(responseParse) {
+    if (responseParse.first == true) {
+      $("#li-prev").addClass("disabled");
+      $("#li-next").removeClass("disabled");
+    } else if (responseParse.last == true) {
+      $("#li-prev").removeClass("disabled");
+      $("#li-next").addClass("disabled");
+    } else {
+      $("#li-prev").removeClass("disabled");
+      $("#li-next").removeClass("disabled");
     }
+  }
 
-    list("");
+  list("");
 
 </script>
 
