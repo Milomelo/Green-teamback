@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.service.UserService;
-import site.metacoding.blogv2.web.Dto.ResponseDto;
-import site.metacoding.blogv2.web.Dto.UpdateDto;
+import site.metacoding.blogv2.web.dto.ResponseDto;
+import site.metacoding.blogv2.web.dto.UpdateDto;
 
 @RequiredArgsConstructor
 @RestController

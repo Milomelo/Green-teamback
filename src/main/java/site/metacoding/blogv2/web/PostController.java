@@ -1,5 +1,8 @@
 package site.metacoding.blogv2.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -13,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.blogv2.domain.comment.Comment;
 import site.metacoding.blogv2.domain.post.Post;
 import site.metacoding.blogv2.domain.post.PostRepository;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.service.PostService;
-import site.metacoding.blogv2.web.Dto.ResponseDto;
+import site.metacoding.blogv2.web.dto.CommentResponseDto;
+import site.metacoding.blogv2.web.dto.ResponseDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -72,6 +77,27 @@ public class PostController {
                 .replaceAll("</script>", "&lt;script/&gt;");
         postEntity.setContent(encContent);
 
+        List<CommentResponseDto> comments = new ArrayList<>();
+
+        for (Comment comment : postEntity.getComments()) {
+            CommentResponseDto dto = new CommentResponseDto();
+            dto.setComment(comment);
+
+            if (principal != null) {
+
+                if (principal.getId() == comment.getUser().getId()) {
+                    dto.setAuth(true); // or false
+                } else {
+                    dto.setAuth(false); // or false
+                }
+            } else {
+                dto.setAuth(false); // or false
+            }
+
+            comments.add(dto);
+        }
+
+        model.addAttribute("comments", comments);
         model.addAttribute("post", postEntity);
         return "/post/detail";
     }

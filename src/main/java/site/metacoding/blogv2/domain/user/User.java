@@ -41,8 +41,6 @@ public class User {
     @Column(length = 60, nullable = false)
     private String email;
 
-    private String imgurl; // 사진의 경로
-
     private String blogname;
 
     @Column(nullable = true)

@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.domain.user.UserRepository;
-import site.metacoding.blogv2.web.Dto.UpdateDto;
+import site.metacoding.blogv2.web.dto.UpdateDto;
 
 @RequiredArgsConstructor
 @Service
@@ -59,7 +59,6 @@ public class UserService {
             userEntity.setPassword(updateDto.getPassword());
             userEntity.setEmail(updateDto.getEmail());
             userEntity.setBlogtitle(updateDto.getBlogtitle());
-            userEntity.setImgurl(updateDto.getImgurl());
         } else {
             throw new RuntimeException("아이디를 찾을 수 없습니다.");
         }

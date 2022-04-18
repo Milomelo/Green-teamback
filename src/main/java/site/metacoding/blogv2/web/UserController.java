@@ -20,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.domain.user.UserRepository;
 import site.metacoding.blogv2.service.UserService;
-import site.metacoding.blogv2.web.Dto.ImgDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -107,29 +106,6 @@ public class UserController {
         model.addAttribute("user", userEntity);
         System.out.println(userEntity);
         return "/user/updateForm";
-    }
-
-    // 이미지업로드
-    @PostMapping("/upload")
-    // 버퍼로 파싱하는게 아니라 폼태그로 전송해서 바로 읽을 수 있다.
-    public String upload(ImgDto imgDto) { // 버퍼로 읽는거 1. json 2. 있는 그대로 받고 싶을 때
-
-        UUID uuid = UUID.randomUUID();
-
-        String requestFileName = imgDto.getFile().getOriginalFilename();
-        System.out.println("전송받은 파일명 : " + requestFileName);
-
-        String imgurl = uuid + "_" + requestFileName;
-        try {
-            Path filePath = Paths.get("src/main/resources/static/upload/" + imgurl);
-            Files.write(filePath, imgDto.getFile().getBytes());
-
-            userRepository.save(imgDto.toEntity(imgurl)); // DB에 들어가는건 경로가 된다.
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return "/updateForm"; // ViewResolver 발동시키기 위해서는 Controller (파일리턴)
     }
 
     // 내 블로그 연결
