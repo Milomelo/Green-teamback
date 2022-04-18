@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv2.domain.category.Category;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.service.CategoryService;
-import site.metacoding.blogv2.web.Dto.CategoryWriteReqDto;
+import site.metacoding.blogv2.web.dto.CategoryWriteReqDto;
 
 @RequiredArgsConstructor
 @Controller

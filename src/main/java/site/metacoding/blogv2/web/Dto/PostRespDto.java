@@ -1,4 +1,4 @@
-package site.metacoding.blogv2.web.Dto;
+package site.metacoding.blogv2.web.dto;
 
 import java.util.List;
 

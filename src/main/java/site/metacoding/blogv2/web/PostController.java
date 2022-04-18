@@ -21,13 +21,11 @@ import site.metacoding.blogv2.domain.post.Post;
 import site.metacoding.blogv2.domain.post.PostRepository;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.service.PostService;
-<<<<<<< HEAD
+
 import site.metacoding.blogv2.web.dto.CommentResponseDto;
 import site.metacoding.blogv2.web.dto.ResponseDto;
-=======
-import site.metacoding.blogv2.web.Dto.PostRespDto;
-import site.metacoding.blogv2.web.Dto.ResponseDto;
->>>>>>> 02146f8f1d9ace3ce4db249db72516b1f0cd5317
+import site.metacoding.blogv2.web.dto.PostRespDto;
+import site.metacoding.blogv2.web.dto.ResponseDto;
 
 @RequiredArgsConstructor
 @Controller

@@ -43,12 +43,10 @@
           <hr />
           <div>
             <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action">팀장</a>
-              <a href="#" class="list-group-item list-group-item-action">임현조</a>
-              <a href="#" class="list-group-item list-group-item-action">비선실세</a>
-              <a href="#" class="list-group-item list-group-item-action">고아라</a>
-              <a href="#" class="list-group-item list-group-item-action">그냥</a>
-              <a href="#" class="list-group-item list-group-item-action">김수현</a>
+              {{#postRespDto.categorys}}
+              <li> <a class="list-group-item list-group-item-action"
+                  href="/user/{{user.id}}/post?categoryId={{id}}">{{title}}</a></li>
+              {{/postRespDto.categorys}}
             </div>
           </div>
         </div>

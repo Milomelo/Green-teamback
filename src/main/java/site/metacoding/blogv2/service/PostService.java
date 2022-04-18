@@ -14,7 +14,7 @@ import site.metacoding.blogv2.domain.category.CategoryRepository;
 import site.metacoding.blogv2.domain.post.Post;
 import site.metacoding.blogv2.domain.post.PostRepository;
 import site.metacoding.blogv2.domain.user.User;
-import site.metacoding.blogv2.web.Dto.PostRespDto;
+import site.metacoding.blogv2.web.dto.PostRespDto;
 
 @RequiredArgsConstructor
 @Service
