@@ -30,6 +30,12 @@ public class PostController {
     private final HttpSession session;
     private final PostService postService;
 
+    @GetMapping("/")
+    public String mainForm(Model model) {
+
+        return "/post/list";
+    }
+
     @GetMapping("/s/post/write-form")
     public String postForm() {
         return "/post/writeForm";
@@ -82,37 +88,6 @@ public class PostController {
             comments.add(dto);
         }
 
-        if (principal != null) {
-
-            if (principal.getId() == postEntity.getUser().getId()) {
-                System.out.println("================여기1");
-
-                if (postEntity.getSecret().equals("0,1")) {
-                    System.out.println("로그인된 아이디 + 비공개 = 자료를 보여줘야함.");
-                    model.addAttribute("secret", true);
-
-                } else {
-
-                    System.out.println("로그인된 아이디 와 공개 = 보여줘야함 즉= 그냥 보여주면 됨.");
-                    model.addAttribute("all", true);
-
-                }
-
-            }
-
-        } else {
-
-            if (postEntity.getSecret().equals("0,1")) {
-                System.out.println("로그인이 안됫고 + 비공개 = 보여주면 안됨 .");
-                model.addAttribute("secret", false);
-
-            } else {
-                System.out.println("전체공개");
-                model.addAttribute("all", true);
-
-            }
-
-        }
         model.addAttribute("comments", comments);
         model.addAttribute("post", postEntity);
 

@@ -28,10 +28,6 @@ public class UserController {
     private final PostService postService;
 
     // 메인
-    @GetMapping("/")
-    public String mainForm() {
-        return "/post/list";
-    }
 
     // 로그인
     @GetMapping("/login-form")

@@ -52,6 +52,12 @@ public class PostService {
         }
     }
 
+    public List<Post> 모든글목록() {
+
+        return postRepository.findAll();
+
+    }
+
     @Transactional
     public void 글삭제하기(Integer id) {
         postRepository.deleteById(id); // 실패했을 때 내부적으로 exception 터짐

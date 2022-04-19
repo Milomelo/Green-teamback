@@ -1,5 +1,7 @@
 package site.metacoding.blogv2.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv2.domain.post.Post;
+import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.service.PostService;
 
 @RequiredArgsConstructor
@@ -19,6 +22,7 @@ import site.metacoding.blogv2.service.PostService;
 public class PostApiController {
 
     private final PostService postService;
+    private final HttpSession session;
 
     @GetMapping("/api/list")
     public ResponseEntity<?> list(String keyword, Integer page,
@@ -26,6 +30,7 @@ public class PostApiController {
 
         Page<Post> posts = postService.글목록보기(keyword, pageable);
         System.out.println(posts);
+
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
