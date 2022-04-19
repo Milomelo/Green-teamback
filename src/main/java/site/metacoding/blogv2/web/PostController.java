@@ -45,13 +45,15 @@ public class PostController {
     public String write(Post post) {
 
         if (session.getAttribute("principal") == null) {
-            System.out.println("세션 없음");
             return "redirect:/login-form";
+        }
+        if (post.getSecret() == null) {
+            post.setSecret("0");
+
         }
 
         User principal = (User) session.getAttribute("principal");
         postService.글쓰기(post, principal);
-        System.out.println("글쓰기 성공");
         return "redirect:/";
     }
 
@@ -86,6 +88,35 @@ public class PostController {
             }
 
             comments.add(dto);
+        }
+        if (principal != null) {
+
+            if (principal.getId() == postEntity.getUser().getId()) {
+
+                if (postEntity.getSecret().equals("1")) {
+
+                    model.addAttribute("secret", false);
+
+                } else {
+
+                    model.addAttribute("all", true);
+
+                }
+
+            }
+
+        } else {
+
+            if (postEntity.getSecret().equals("1")) {
+
+                model.addAttribute("secret", true);
+
+            } else {
+
+                model.addAttribute("all", true);
+
+            }
+
         }
 
         model.addAttribute("comments", comments);

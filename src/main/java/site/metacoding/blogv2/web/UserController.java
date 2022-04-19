@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
-
+import site.metacoding.blogv2.domain.post.Post;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.domain.user.UserRepository;
 import site.metacoding.blogv2.service.PostService;
@@ -37,7 +37,6 @@ public class UserController {
             Cookie[] cookies = request.getCookies();
 
             for (Cookie cookie : cookies) {
-                System.out.println("쿠키값 : " + cookie.getName());
                 if (cookie.getName().equals("remember")) {
                     model.addAttribute("remember", cookie.getValue());
                 }
@@ -99,7 +98,6 @@ public class UserController {
     public String updateForm(@PathVariable Integer id, Model model) {
         User userEntity = userService.회원정보(id);
         model.addAttribute("user", userEntity);
-        System.out.println(userEntity);
         return "/user/updateForm";
     }
 
@@ -111,9 +109,10 @@ public class UserController {
         // 카테고리연결
         PostRespDto postRespDto = postService.게시글목록보기(userId);
         model.addAttribute("postRespDto", postRespDto);
-
         model.addAttribute("user", userEntity);
+
         return "/user/myBlog";
+
     }
 
     @GetMapping("/user/blog/{userId}")
@@ -130,6 +129,19 @@ public class UserController {
         User userEntity = userService.회원아이디불러오기(userId);
         // 카테고리연결
         PostRespDto postRespDto = postService.게시글목록보기(userId);
+        Post postEntity = postService.글상세보기(userId);
+        System.out.println("=============================================");
+        System.out.println(postEntity.getSecret());
+        if (postEntity.getSecret().equals("1")) {
+
+            model.addAttribute("secret", false);
+
+        } else {
+
+            model.addAttribute(" secret", true);
+
+        }
+
         model.addAttribute("postRespDto", postRespDto);
         model.addAttribute("user", userEntity);
         return "/user/otherBlog";

@@ -13,8 +13,7 @@
                 <textarea name="content" rows="10" class="form-control" id="content"></textarea>
             </div>
             <button type="submit" class="btn btn-secondary">글쓰기</button>
-            <input type="hidden" name="secret" value="0" id="input_check_hiddent" />
-            <input type="checkbox" name="secret" value="1" id="input_check" />
+            <input type="checkbox" name="secret" value="" id="input_check" />
 
         </form>
     </div>
@@ -24,21 +23,23 @@
 <!-- 컨테이너 끝 -->
 
 
+
 <script>
     var quill = new Quill('#content', {
         theme: 'snow'
     });
 
+    $("#input_check").click(() => {
+        let checked = $("#input_check").is(`:checked`);
+        let remember = checked ? "1" : "0";
+        $("#input_check").val(remember);
+        console.log($("#input_check").val());
+    });
 
 
-    if ($("#input_chechk").off) {
-        $("#input_check_hiddent").val("0");
-    }
 
 
-    if ($("#input_chechk").on{
-        $("#input_check").val("1");
-    }
+
 </script>
 
 {{> /layout/footer}}

@@ -53,10 +53,10 @@
       </div>
       <!-- 블로그 카테고리 끝-->
 
+
       <!-- 블로그 포스트 시작-->
       <input type="hidden" id="userId" value="{{userId}}">
       <div class="col-sm-6" id="post-box">
-
 
 
       </div>
@@ -149,15 +149,16 @@
   }
 
   function postItemRender(post) {
-    return `<div class="my-mb blog-flex-center"  style="cursor: pointer;" onclick="location.href='/post/${post.id}';">
-            <div class="blog-card">
-                <img class="card-img-top" src="/image/Very_Peri.jpg" alt="Card image">
-                    <div class="card-body">
-                        <h4 class="card-title"> ${post.title}</h4>
-                        <p class="card-text">${post.content}</p>
-                        <p>작성일 · 댓글수</p>
-                    </div>
+    return ` 
+        <div class="my-mb blog-flex-center" style="cursor: pointer;" onclick="location.href='/post/${post.id}';">
+          <div class="blog-card">
+            <img class="card-img-top" src="/image/Very_Peri.jpg" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title"> ${post.title}</h4>
+              <p class="card-text">${post.content}</p>
+              <p>작성일 · 댓글수</p>
             </div>
+          </div>
         </div>`;
 
 

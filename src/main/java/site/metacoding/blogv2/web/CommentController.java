@@ -13,7 +13,6 @@ import site.metacoding.blogv2.domain.comment.Comment;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.service.CommentService;
 import site.metacoding.blogv2.web.dto.ResponseDto;
-import site.metacoding.blogv2.web.util.Script;
 
 @RequiredArgsConstructor
 @Controller

@@ -78,4 +78,8 @@ public class PostService {
         return postRepository.mfindByUserID(userId, mykeyword, pageable);
     }
 
+    public Page<Post> 다른유저글목록보기(Integer userId, String mykeyword, Pageable pageable) {
+        return postRepository.mfindOtherByUserID(userId, mykeyword, pageable);
+    }
+
 }
