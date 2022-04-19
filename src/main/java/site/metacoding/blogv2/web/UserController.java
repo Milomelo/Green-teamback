@@ -129,18 +129,6 @@ public class UserController {
         User userEntity = userService.회원아이디불러오기(userId);
         // 카테고리연결
         PostRespDto postRespDto = postService.게시글목록보기(userId);
-        Post postEntity = postService.글상세보기(userId);
-        System.out.println("=============================================");
-        System.out.println(postEntity.getSecret());
-        if (postEntity.getSecret().equals("1")) {
-
-            model.addAttribute("secret", false);
-
-        } else {
-
-            model.addAttribute(" secret", true);
-
-        }
 
         model.addAttribute("postRespDto", postRespDto);
         model.addAttribute("user", userEntity);

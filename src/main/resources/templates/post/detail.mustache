@@ -6,7 +6,6 @@
 
 
 
-    {{#all}}
     <span class="button gray medium"><a href="#" onclick="lnik(); return false;">URL주소복사</a></span>
     <div class="mb-3">
         작성자 : <a href="/user/other-blog/{{post.user.id}}">{{post.user.username}}</a>
@@ -18,7 +17,6 @@
     <div class="mb-3">
         {{{post.content}}}
     </div>
-
     {{#pageOwner}}
     <a href="/s/post/{{post.id}}/updateForm" class="btn btn-dark">수정</a>
     <button class="btn btn-danger" id="btn-delete">삭제</button>
@@ -39,61 +37,6 @@
         </form>
     </div>
 </div>
-<div class="card">
-    <div class="card-header"><b>댓글 리스트</b></div>
-    <ul id="reply-box" class="list-group">
-
-        {{#comments}}
-        <li class="list-group-item d-flex justify-content-between">
-            <div>{{comment.content}}</div>
-            <div class="d-flex">
-                <div class="font-italic">작성자 : {{post.user.username}} &nbsp;</div>
-                {{#auth}}
-                <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button>
-                {{/auth}}
-            </div>
-        </li>
-        {{/comments}}
-
-    </ul>
-</div>
-{{/all}}
-{{^all}}
-{{#secret}}
-비공개글입니다.
-{{/secret}}
-{{^secret}}
-<span class="button gray medium"><a href="#" onclick="lnik(); return false;">URL주소복사</a></span>
-<div class="mb-3">
-    작성자 : <a href="/user/other-blog/{{post.user.id}}">{{post.user.username}}</a>
-</div>
-<div class="mb-3 mt-3">
-    <h1>{{post.title}}</h1>
-</div>
-<hr />
-<div class="mb-3">
-    {{{post.content}}}
-</div>
-{{#pageOwner}}
-<a href="/s/post/{{post.id}}/updateForm" class="btn btn-dark">수정</a>
-<button class="btn btn-danger" id="btn-delete">삭제</button>
-{{/pageOwner}}
-
-<!-- 상세정보보기 끝 -->
-
-<!--댓글-->
-
-<div class="card">
-    <form action="/s/post/{{post.Id}}/comment" method="post">
-        <div class="card-body">
-            <textarea name="content" class="form-control" rows="1"></textarea>
-        </div>
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary">등록</button>
-        </div>
-    </form>
-</div>
-</div>
 
 
 <div class="card">
@@ -114,8 +57,7 @@
 
     </ul>
 </div>
-{{/secret}}
-{{/all}}
+
 
 
 
