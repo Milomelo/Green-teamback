@@ -71,6 +71,8 @@ public class Post {
     @ManyToOne
     private Category category;
 
+    private String secret;
+
     @CreatedDate // insert 할때만 동작
     private LocalDateTime createDate;
     @LastModifiedDate // update 할때만 동작

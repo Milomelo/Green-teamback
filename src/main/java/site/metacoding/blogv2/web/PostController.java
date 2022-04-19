@@ -56,20 +56,6 @@ public class PostController {
 
         Post postEntity = postService.글상세보기(id);
 
-        // 게시물이 없으면 error 페이지 이동
-        if (postEntity == null) {
-            return "error/page1";
-        }
-
-        if (principal != null) {
-            // 권한 확인해서 view로 값을 넘김.
-            if (principal.getId() == postEntity.getUser().getId()) { // 권한 있음
-                model.addAttribute("pageOwner", true);
-            } else {
-                model.addAttribute("pagrOwner", false);
-            }
-        }
-
         String rawContent = postEntity.getContent();
         String encContent = rawContent
                 .replaceAll("<script>", "&lt;script&gt;")
@@ -98,6 +84,7 @@ public class PostController {
 
         model.addAttribute("comments", comments);
         model.addAttribute("post", postEntity);
+
         return "/post/detail";
     }
 

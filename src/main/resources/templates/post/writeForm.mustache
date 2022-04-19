@@ -5,16 +5,19 @@
 
     <!-- 글쓰기 폼 시작 -->
     <div>
-    <form action="/s/post" method="post">
-        <div class="mb-3 mt-3">
-            <input name="title" type="text" class="form-control" placeholder="Enter title">
-        </div>
-        <div class="mb-3">
-            <textarea name="content" rows="10" class="form-control" id="content"></textarea>
-        </div>
-        <button type="submit" class="btn btn-secondary">글쓰기</button>
-    </form>
-</div>
+        <form action="/s/post" method="post">
+            <div class="mb-3 mt-3">
+                <input name="title" type="text" class="form-control" placeholder="Enter title">
+            </div>
+            <div class="mb-3">
+                <textarea name="content" rows="10" class="form-control" id="content"></textarea>
+            </div>
+            <button type="submit" class="btn btn-secondary">글쓰기</button>
+            <input type="hidden" name="secret" value="0" id="input_check_hiddent" />
+            <input type="checkbox" name="secret" value="1" id="input_check" />
+
+        </form>
+    </div>
     <!-- 글쓰기 폼 끝 -->
 
 </div>
@@ -23,8 +26,19 @@
 
 <script>
     var quill = new Quill('#content', {
-      theme: 'snow'
+        theme: 'snow'
     });
-  </script>
+
+
+
+    if ($("#input_chechk").off) {
+        $("#input_check_hiddent").val("0");
+    }
+
+
+    if ($("#input_chechk").on{
+        $("#input_check").val("1");
+    }
+</script>
 
 {{> /layout/footer}}
