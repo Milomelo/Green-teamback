@@ -101,14 +101,14 @@
 
   function postItemRender(post) {
     return `
-    <div class= "col-3 card" style="cursor: pointer;" onclick="location.href='/user/other-blog/${post.user.id}';" >
+    <div class= "col-3 card" style="cursor: pointer;"onclick="location.href='/post/${post.id}';">
       <img class="card-img-top" src="/image/Very_Peri.jpg" alt="Card image" >
       <div class="card-body">
         <h4 class="card-title">${post.title}</h4>
         <p class="card-text">${post.content}</p>
         <p>작성일 · 댓글수</p>
         <div class="card-profile">
-          <a href="#" class="card-link my-link"><img src="/image/coomon.jpg" class="rounded-circle card-img-profile" alt="Card image"> by suhyeon5028</a>
+          <a href="/user/other-blog/${post.user.id}" class="card-link my-link"><img src="/image/coomon.jpg" class="rounded-circle card-img-profile" alt="Card image"> by ${post.user.username}</a>
           <button>
 			</button>
         </div>        
