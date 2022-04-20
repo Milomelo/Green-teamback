@@ -1,5 +1,6 @@
 package site.metacoding.blogv2.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,19 +15,27 @@ import site.metacoding.blogv2.domain.category.CategoryRepository;
 import site.metacoding.blogv2.domain.post.Post;
 import site.metacoding.blogv2.domain.post.PostRepository;
 import site.metacoding.blogv2.domain.user.User;
+import site.metacoding.blogv2.domain.user.UserRepository;
 import site.metacoding.blogv2.web.dto.PostRespDto;
+import site.metacoding.blogv2.web.dto.PostWriteReqDto;
 
 @RequiredArgsConstructor
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
 
     @Transactional
     public void 글쓰기(Post post, User principal) {
         post.setUser(principal); // User FK 추가!!
         postRepository.save(post);
+    }
+
+    public List<Category> 게시글쓰기화면(Integer userId) {
+        return categoryRepository.findByUserId(userId);
+        // return categoryRepository.findAll();
     }
 
     public Page<Post> 글목록보기(String keyword, Pageable pageable) {

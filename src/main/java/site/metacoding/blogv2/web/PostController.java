@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.blogv2.domain.category.Category;
+import site.metacoding.blogv2.domain.category.CategoryRepository;
 import site.metacoding.blogv2.domain.comment.Comment;
 import site.metacoding.blogv2.domain.post.Post;
 import site.metacoding.blogv2.domain.post.PostRepository;
@@ -24,18 +26,32 @@ import site.metacoding.blogv2.service.PostService;
 
 import site.metacoding.blogv2.web.dto.CommentResponseDto;
 import site.metacoding.blogv2.web.dto.ResponseDto;
-import site.metacoding.blogv2.web.dto.PostRespDto;
-import site.metacoding.blogv2.web.dto.ResponseDto;
 
 @RequiredArgsConstructor
 @Controller
 public class PostController {
-    private final PostRepository postRepository;
+    private final CategoryRepository categoryRepository;
     private final HttpSession session;
     private final PostService postService;
 
-    @GetMapping("/s/post/write-form")
-    public String postForm() {
+    // 글쓰기
+    @GetMapping("/s/post/{id}/write-form")
+    public String postForm(Model model, @PathVariable Integer id) {
+
+        User pri = (User) session.getAttribute("principal");
+        List<Category> categorys = categoryRepository.findByUserId(id);
+        System.out.println("================카테고리입니다" + categorys);
+        if (pri.getId() == id) {
+
+            // for (int i = 0; i < categorys.size(); i++) {
+
+            // System.out.println(categorys.get(i).getTitle());
+
+            // }
+
+            model.addAttribute("categorys", categorys);
+        }
+
         return "/post/writeForm";
     }
 

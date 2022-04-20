@@ -11,7 +11,7 @@ spring:
   mustache:
     expose-session-attributes: true
   datasource:
-      url: jdbc:mysql://localhost:3306/greendb
+      url: jdbc:mysql://localhost:3306/test1
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: green
       password: green1234
