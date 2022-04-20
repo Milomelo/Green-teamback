@@ -1,6 +1,6 @@
 package site.metacoding.blogv2.domain.post;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,7 +28,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import site.metacoding.blogv2.domain.category.Category;
 import site.metacoding.blogv2.domain.comment.Comment;
-import site.metacoding.blogv2.domain.love.Love;
 import site.metacoding.blogv2.domain.user.User;
 
 @AllArgsConstructor
@@ -74,8 +73,8 @@ public class Post {
     private String secret;
 
     @CreatedDate // insert 할때만 동작
-    private LocalDateTime createDate;
+    private LocalDate createDate;
     @LastModifiedDate // update 할때만 동작
-    private LocalDateTime updateDate;
+    private LocalDate updateDate;
 
 }
