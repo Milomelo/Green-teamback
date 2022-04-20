@@ -2,6 +2,7 @@ package site.metacoding.blogv2.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv2.domain.category.Category;
@@ -22,8 +24,8 @@ import site.metacoding.blogv2.domain.comment.Comment;
 import site.metacoding.blogv2.domain.post.Post;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.service.PostService;
-
 import site.metacoding.blogv2.web.dto.CommentResponseDto;
+import site.metacoding.blogv2.web.dto.PostWriteReqDto;
 import site.metacoding.blogv2.web.dto.ResponseDto;
 
 @RequiredArgsConstructor
@@ -47,6 +49,7 @@ public class PostController {
         User pri = (User) session.getAttribute("principal");
         List<Category> categorys = categoryRepository.findByUserId(id);
         System.out.println("================카테고리입니다" + categorys);
+
         if (pri.getId() == id) {
 
             // for (int i = 0; i < categorys.size(); i++) {
@@ -62,18 +65,19 @@ public class PostController {
     }
 
     @PostMapping("/s/post")
-    public String write(Post post) {
+    public String write(Post post, PostWriteReqDto postWriteReqDto, MultipartFile file) {
 
         if (session.getAttribute("principal") == null) {
             return "redirect:/login-form";
         }
         if (post.getSecret() == null) {
             post.setSecret("0");
+        } else {
 
         }
 
         User principal = (User) session.getAttribute("principal");
-        postService.글쓰기(post, principal);
+        postService.글쓰기(post, principal, postWriteReqDto);
         return "redirect:/";
     }
 
