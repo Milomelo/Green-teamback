@@ -13,7 +13,6 @@ import site.metacoding.blogv2.domain.comment.Comment;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.service.CommentService;
 import site.metacoding.blogv2.web.dto.ResponseDto;
-import site.metacoding.blogv2.web.util.Script;
 
 @RequiredArgsConstructor
 @Controller
@@ -22,15 +21,17 @@ public class CommentController {
     private final HttpSession session;
 
     @PostMapping("/s/post/{postId}/comment")
-    public @ResponseBody String write(@PathVariable Integer postId, Comment comment) { // x-www-form~~
+    public String write(@PathVariable Integer postId, Comment comment) { // x-www-form~~
         User principal = (User) session.getAttribute("principal");
+
         if (principal != null) {
             comment.setUser(principal);
             commentService.댓글쓰기(comment, postId);
             return "redirect:/post/" + postId;
+
         } else {
 
-            return Script.href("redirect:/post/", "로그인을 하세요");
+            return "redirect:/login-form";
         }
 
     }

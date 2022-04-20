@@ -4,9 +4,11 @@
 <div class="container mt-3">
     <input type="hidden" id="id" value="{{post.id}}">
 
-    <!-- 상세정보보기 시작 -->
+
+
+    <span class="button gray medium"><a href="#" onclick="lnik(); return false;">URL주소복사</a></span>
     <div class="mb-3">
-        작성자 : <a href="/user/other-blog/{{id}}">{{post.user.username}}</a>
+        작성자 : <a href="/user/other-blog/{{post.user.id}}">{{post.user.username}}</a>
     </div>
     <div class="mb-3 mt-3">
         <h1>{{post.title}}</h1>
@@ -15,7 +17,6 @@
     <div class="mb-3">
         {{{post.content}}}
     </div>
-
     {{#pageOwner}}
     <a href="/s/post/{{post.id}}/updateForm" class="btn btn-dark">수정</a>
     <button class="btn btn-danger" id="btn-delete">삭제</button>
@@ -37,6 +38,7 @@
     </div>
 </div>
 
+
 <div class="card">
     <div class="card-header"><b>댓글 리스트</b></div>
     <ul id="reply-box" class="list-group">
@@ -55,6 +57,10 @@
 
     </ul>
 </div>
+
+
+
+
 <br />
 <!-- 컨테이너 끝 -->
 
@@ -95,4 +101,20 @@
 
 </script>
 
+<script type="text/javascript">
+
+    function link() {
+
+        var url = '';
+        var textarea = document.createElement("textarea");
+        document.body.appendChild(textarea);
+        url = window.document.location.href;
+        textarea.value = url;
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        alert("URL이 복사되었습니다.")
+    }
+
+</script>
 {{> /layout/footer}}

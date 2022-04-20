@@ -25,7 +25,7 @@ public class PostApiController {
             @PageableDefault(size = 9, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<Post> posts = postService.글목록보기(keyword, pageable);
-        System.out.println(posts);
+
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
@@ -33,12 +33,16 @@ public class PostApiController {
     public ResponseEntity<?> mylist(@PathVariable Integer userId, String mykeyword, Integer page,
             @PageableDefault(size = 9, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
-        System.out.println("pageable : " + pageable.getPageNumber());
-        System.out.println("page : " + page);
-
         Page<Post> posts = postService.유저글목록보기(userId, mykeyword, pageable);
 
-        System.out.println("잘왔어? " + posts);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/{userId}/otherlist")
+    public ResponseEntity<?> otherlist(@PathVariable Integer userId, String mykeyword, Integer page,
+            @PageableDefault(size = 9, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+
+        Page<Post> posts = postService.다른유저글목록보기(userId, mykeyword, pageable);
 
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }

@@ -70,8 +70,25 @@
 
         </textarea>
         <button type="submit" class="my_active_btn">글쓰기 등록</button>
+        <input type="checkbox" name="secret" value="" id="input_check" />
     </form>
     <br />
+
+    <!-- 글쓰기 폼 시작 -->
+    <div>
+        <form action="/s/post" method="post">
+            <div class="mb-3 mt-3">
+                <input name="title" type="text" class="form-control" placeholder="Enter title">
+            </div>
+            <div class="mb-3">
+                <textarea name="content" rows="10" class="form-control" id="content"></textarea>
+            </div>
+            <button type="submit" class="btn btn-secondary">글쓰기</button>
+            <input type="checkbox" name="secret" value="" id="input_check" />
+
+        </form>
+    </div>
+    <!-- 글쓰기 폼 끝 -->
 
 </div>
 
@@ -83,8 +100,11 @@
     }
 </script>
 
+
+
 <!-- Include the Quill library -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
 
 <script>
     var quill = new Quill('#editor-container', {
@@ -96,6 +116,14 @@
         placeholder: '게시물을 작성해주세요.',
         theme: 'snow'
     });
+    $("#input_check").click(() => {
+        let checked = $("#input_check").is(`:checked`);
+        let remember = checked ? "1" : "0";
+        $("#input_check").val(remember);
+        console.log($("#input_check").val());
+    });
+
+
 </script>
 
 {{> /layout/footer}}

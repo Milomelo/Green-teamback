@@ -61,6 +61,12 @@ public class PostService {
         }
     }
 
+    public List<Post> 모든글목록() {
+
+        return postRepository.findAll();
+
+    }
+
     @Transactional
     public void 글삭제하기(Integer id) {
         postRepository.deleteById(id); // 실패했을 때 내부적으로 exception 터짐
@@ -79,6 +85,10 @@ public class PostService {
 
     public Page<Post> 유저글목록보기(Integer userId, String mykeyword, Pageable pageable) {
         return postRepository.mfindByUserID(userId, mykeyword, pageable);
+    }
+
+    public Page<Post> 다른유저글목록보기(Integer userId, String mykeyword, Pageable pageable) {
+        return postRepository.mfindOtherByUserID(userId, mykeyword, pageable);
     }
 
 }
