@@ -1,67 +1,180 @@
 {{> /layout/header}}
 
 <!-- 컨테이너 시작 -->
-<div class="container mt-3">
+<div class="container">
     <input type="hidden" id="id" value="{{post.id}}">
-
-
-
-    <span class="button gray medium"><a href="#" onclick="lnik(); return false;">URL주소복사</a></span>
-    <div class="mb-3">
-        작성자 : <a href="/user/other-blog/{{post.user.id}}">{{post.user.username}}</a>
-    </div>
-    <div class="mb-3 mt-3">
-        <h1>{{post.title}}</h1>
-    </div>
-    <hr />
-    <div class="mb-3">
-        {{{post.content}}}
-    </div>
-    {{#pageOwner}}
-    <a href="/s/post/{{post.id}}/updateForm" class="btn btn-dark">수정</a>
-    <button class="btn btn-danger" id="btn-delete">삭제</button>
-    {{/pageOwner}}
-
-    <!-- 상세정보보기 끝 -->
-
-    <!--댓글-->
-
-    <div class="card">
-        <form action="/s/post/{{post.Id}}/comment" method="post">
-            <div class="card-body">
-                <textarea name="content" class="form-control" rows="1"></textarea>
+    <!-- 블로그 제목, 정보 시작-->
+    <div class="box-form4">
+        <div class="col-sm-6 px-1">
+            <div class="blog-flex-start">
+                <span onclick="location.href='/user/other-blog/{{post.user.id}}' ">카테고리 자리</span>
             </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">등록</button>
+            <div class="blog-flex-start  pt-4">
+                <h1 class="card-title">{{post.title}}</h1>
             </div>
-        </form>
+            <div class="box-form3">
+                <div class="blog-flex-start pt-3">
+                    <span class="card-title my-link"
+                        onclick="location.href='/user/other-blog/{{post.user.id}}' ">{{post.user.username}}</span>
+                    <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+                    <span>{{post.user.createDate}}</span>
+                    <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+                    <span class="badge bg-dark"><i class="fa-solid fa-lock"
+                            style="color: white;"></i>&nbsp;&nbsp;비공개</span>
+                </div>
+                {{#pageOwner}}
+                <div class="blog-flex-end">
+                    <button class="blog-update-delete"
+                        onclick="location.href='/s/post/{{post.id}}/updateForm' ">수정</button>
+                    <!-- Button to Open the Modal -->
+                    <button class="blog-update-delete" data-bs-toggle="modal" data-bs-target="#myModal">삭제</button>
+                </div>
+                {{/pageOwner}}
+            </div>
+        </div>
     </div>
+    <!-- 블로그 제목, 정보 끝-->
+
+    <!-- 삭제 모달 시작 -->
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content modal-color">
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    삭제할까요?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer box-form4">
+                    <button type="button" class="modal-cancel-btn" data-bs-dismiss="modal">아니오</button>
+                    <button id="btn-delete" type="button" class="modal-submit-btn" data-dismiss="modal">네</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 삭제 모달 끝 -->
+
+    <!-- 블로그 내 포스트 시작-->
+    <div class="row blog-flex-around my-3">
+
+        <!-- 블로그 좋아요, 링크 시작-->
+        <div class="col-sm-3 blog-flex-end">
+            <div class="like-form">
+
+                <button class="blog-like"><i class="fa-solid fa-heart fa-lg"></i></button>
+
+                <div class="blog-like-count">100</div>
+
+                <button class="blog-share" onclick="link(); return false;"><i
+                        class="fa-solid fa-paperclip fa-lg"></i></button>
+
+            </div>
+        </div>
+        <!-- 블로그 좋아요, 링크 끝-->
+
+        <!-- 블로그 포스트 시작-->
+        <div class="col-sm-6">
+
+            <div class="blog-flex-center">
+                <div class="detail-img">
+                    <img src="" alt="">
+                    {{{post.content}}}
+                </div>
+            </div>
+
+            <div class="blog-flex-start mt-5">
+                <div class="blog-flex-start blog-profile">
+                    <div class="col-2 blog-profile-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdUZ_9tEpmdSFXY_yLnlAe6qR4yZ8Czl2mvw&usqp=CAU"
+                            alt="Profile" class="rounded-circle profile">
+                    </div>
+                    <div class="mx-2 flex-grow-1">
+                        <div class="blog-user">{{post.user.blogname}}</div>
+                        <div>{{post.user.blogtitle}}</div>
+                        <div>{{post.user.username}}</div>
+                    </div>
+                </div>
+                <hr />
+            </div>
+
+            <!-- 이전, 다음포스트 시작 -->
+            <div class="box-form3 my-5">
+                <div class="blog-flex-start">
+                    <button class="btn"><i class="fa-solid fa-chevron-left"></i>&nbsp;prev</button>
+                </div>
+                <div class="blog-flex-end">
+                    <button class="btn">next&nbsp;<i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <!-- 이전, 다음포스트 끝 -->
+
+            <!-- 댓글작성 시작 -->
+            <div class="mt-4">
+                <form action="/s/post/{{post.Id}}/comment" method="post">
+                    <div class="blog-flex-start">
+                        <div>~개의 댓글</div>
+                    </div>
+                    <div class="blog-flex-center my-2">
+                        <textarea name="content" class="blog-comment" placeholder="댓글을 작성하세요"></textarea>
+                    </div>
+                    <div class="blog-flex-end mb-3">
+                        <button type="submit" class="btn">댓글작성</button>
+                    </div>
+                </form>
+            </div>
+            <!-- 댓글작성 끝 -->
+
+            <!-- 댓글리스트 -->
+            <div>
+                <ul id="reply-box" class="list-group">
+
+                    {{#comments}}
+                    <div class="my-3">
+                        <div class="my-3">
+                            <div class="mb-3 blog-flex-start blog-profile">
+                                <div class="col-2 comment-profile-img">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdUZ_9tEpmdSFXY_yLnlAe6qR4yZ8Czl2mvw&usqp=CAU"
+                                        alt="Profile" class="rounded-circle profile">
+                                </div>
+                                <div class="box-form3 flex-grow-1">
+                                    <div class="mx-2 comment-profile">
+                                        <div class="blog-user">{{post.user.username}}</div>
+                                        <div>{{post.user.createDate}}</div>
+                                    </div>
+                                    <div>
+                                        {{#auth}}
+                                        <button class="blog-update-delete"
+                                            onclick="deleteComment('{{comment.id}}');">삭제</button>
+                                        {{/auth}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>{{comment.content}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    {{/comments}}
+
+                </ul>
+            </div>
+            <!-- 댓글리스트 -->
+
+        </div>
+        <!-- 블로그 포스트 끝-->
+
+        <!-- 블로그 빈칸 시작-->
+        <div class="col-sm-3 blog-box"></div>
+        <!-- 블로그 빈칸 끝-->
+
+    </div>
+    <!-- 블로그 내 포스트 끝-->
+
 </div>
-
-
-<div class="card">
-    <div class="card-header"><b>댓글 리스트</b></div>
-    <ul id="reply-box" class="list-group">
-
-        {{#comments}}
-        <li class="list-group-item d-flex justify-content-between">
-            <div>{{comment.content}}</div>
-            <div class="d-flex">
-                <div class="font-italic">작성자 : {{post.user.username}} &nbsp;</div>
-                {{#auth}}
-                <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button>
-                {{/auth}}
-            </div>
-        </li>
-        {{/comments}}
-
-    </ul>
-</div>
-
-
-
-
-<br />
 <!-- 컨테이너 끝 -->
 
 
@@ -85,7 +198,6 @@
         deleteById();
     });
 
-
     async function deleteComment(commentId) {
         let response = await fetch(`/s/api/comment/${commentId}`, {
             method: "DELETE"
@@ -98,13 +210,10 @@
             alert("삭제 실패");
         }
     }
-
 </script>
 
 <script type="text/javascript">
-
     function link() {
-
         var url = '';
         var textarea = document.createElement("textarea");
         document.body.appendChild(textarea);
@@ -115,6 +224,6 @@
         document.body.removeChild(textarea);
         alert("URL이 복사되었습니다.")
     }
-
 </script>
+
 {{> /layout/footer}}

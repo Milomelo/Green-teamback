@@ -1,47 +1,36 @@
-{{> /layout/header}}
+{{> /layout/withoutNavHeader}}
 
-<!-- 컨테이너 시작 -->
-<div class="container mt-3">
-
-    <!-- 회원가입 폼 시작 -->
-    <div class="box-form1">
-        <div class="box-form2">
-            <div class="my-2 brand-logo">
-                글하다
-            </div>
-            <form action="/join" method="post">
-                <div class="my-2">
-                    <input type="text" class="form-control input-form" placeholder="Enter username" name="username"
-                        id="username" maxlength="20" required />
-                </div>
-                <div class="my-2">
-                    <input type="password" class="form-control input-form" placeholder="Enter password" name="password"
-                        id="password" maxlength="20" required />
-                </div>
-                <div class="my-2">
-                    <input type="email" class="form-control input-form" placeholder="Enter email" name="email"
-                        id="email" maxlength="20" required />
-                </div>
-                <div class="my-2">
-                    <input type="text" class="form-control input-form" placeholder="Enter blogname" name="blogname"
-                        id="blogname" maxlength="100" required />
-                </div>
-                <input type="hidden" class="form-control input-form" placeholder="Enter title" name="blogtitle"
-                    id="blogtitle" maxlength="100" required />
-
-                <div class="box-form3 my-3">
-                    <button type="submit" class="submit-btn">회원가입</button>
-            </form>
-            <button type="button" class="cancel-btn"><a href="/login-form" class="exit-link">나가기</a></button>
-        </div>
+<!-- 회원가입 폼 시작 -->
+<div class="box-form2 center-form">
+    <div class="my-2 brand-logo" onclick="location.href='/'">
+        글하다
     </div>
+    <form action="/join" method="post">
+        <div class="my-2">
+            <input type="text" class="form-control input-form" placeholder="ID" name="username" id="username"
+                maxlength="20" required />
+        </div>
+        <div class="my-2">
+            <input type="password" class="form-control input-form" placeholder="Password" name="password" id="password"
+                maxlength="20" required />
+        </div>
+        <div class="my-2">
+            <input type="email" class="form-control input-form" placeholder="E-mail" name="email" id="email"
+                maxlength="20" required />
+        </div>
+        <div class="my-2">
+            <input type="text" class="form-control input-form" placeholder="Blogname" name="blogname" id="blogname"
+                maxlength="100" required />
+        </div>
+        <input type="hidden" class="form-control input-form" placeholder="Blogtitle" name="blogtitle" id="blogtitle"
+            maxlength="100" required />
+
+        <div class="box-form3 my-3">
+            <button type="button" class="cancel-btn" onclick="location.href='/login-form'">나가기</button>
+            <button type="submit" class="submit-btn">회원가입</button>
+        </div>
     </form>
 </div>
 <!-- 회원가입 폼 끝 -->
-
-</div>
-
-
-<!-- 컨테이너 끝 -->
 
 {{> /layout/footer}}

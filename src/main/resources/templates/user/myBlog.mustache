@@ -27,10 +27,15 @@
     <!-- 블로그 맨 위 소개 끝-->
 
     <!-- 블로그 내 검색 시작-->
-    <form class="d-flex justify-content-end">
-      <input id="mykeyword" name="mykeyword" class="me-2" type="text" placeholder="Search">
-      <button id="mybtn-search" class="btn btn-primary" type="button">검색</button>
-    </form>
+    <div class="my-mtb blog-flex-end">
+      <div class="blog-search">
+        <div class="blog-search-input-form" style="margin-top: 12px;">
+          <input id="mykeyword" name="mykeyword" type="text" placeholder="검색어를 입력하세요">
+          <button id="mybtn-search" class="blog-search-icon" type="button"><i
+              class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+      </div>
+    </div>
     <!-- 블로그 내 검색 끝-->
 
     <!-- 블로그 본문 시작-->
@@ -39,24 +44,36 @@
       <!-- 블로그 카테고리 시작-->
       <div class="col-sm-3 blog-flex-end">
         <div class="blog-category">
-          <div>&nbsp;&nbsp;&nbsp;카테고리 목록</div>
+          <div class="box-form3">
+            <div>
+              &nbsp;&nbsp;&nbsp;카테고리 목록
+            </div>
+            <div>
+              <button class="blog-update-delete" onclick="location.href='/s/category/writeForm' "><i
+                  class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
           <hr />
           <div>
             <div class="list-group">
-              {{#postRespDto.categorys}}
-              <li> <a class="list-group-item list-group-item-action"
-                  href="/user/{{user.id}}/post?categoryId={{id}}">{{title}}</a></li>
-              {{/postRespDto.categorys}}
+              <ul class="category-list" style="list-style: none; float: left;">
+                {{#postRespDto.categorys}}
+                <li>
+                  <a class="list-group-item list-group-item-action"
+                    href="/user/{{user.id}}/post?categoryId={{id}}">{{title}}</a>
+                </li>
+                {{/postRespDto.categorys}}
+              </ul>
             </div>
           </div>
         </div>
       </div>
       <!-- 블로그 카테고리 끝-->
 
-
       <!-- 블로그 포스트 시작-->
       <input type="hidden" id="userId" value="{{userId}}">
       <div class="col-sm-6" id="post-box">
+
 
 
       </div>
@@ -149,16 +166,15 @@
   }
 
   function postItemRender(post) {
-    return ` 
-        <div class="my-mb blog-flex-center" style="cursor: pointer;" onclick="location.href='/post/${post.id}';">
-          <div class="blog-card">
-            <img class="card-img-top" src="/image/Very_Peri.jpg" alt="Card image">
-            <div class="card-body">
-              <h4 class="card-title"> ${post.title}</h4>
-              <p class="card-text">${post.content}</p>
-              <p>작성일 · 댓글수</p>
+    return `<div class="my-mb blog-flex-center">
+            <div class="blog-card">
+                <img class="card-img-top" src="/image/Very_Peri.jpg" alt="Card image">
+                    <div class="card-body">
+                        <h4 class="card-title" ><a href="/post/${post.id}"> ${post.title}</h4>
+                        <p class="card-text">${post.content}</p>
+                        <p>작성일 · 댓글수</p>
+                    </div>
             </div>
-          </div>
         </div>`;
 
 

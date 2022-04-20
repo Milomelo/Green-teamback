@@ -19,13 +19,7 @@
   <!-- 탭 끝 -->
 
   <!-- 게시글 아이템 시작 -->
-
-
-
-
-  <div class="row d-flex justify-content-between" id="post-box">
-  </div>
-
+  <div class="row row-cols-3 list-form" id="post-box"></div>
   <!-- 게시글 아이템 끝 -->
 
   <!-- 페이징 시작 -->
@@ -112,8 +106,14 @@
         <p>작성일 · 댓글수</p>
         <div class="card-profile">
           <a href="/user/other-blog/${post.user.id}" class="card-link my-link"><img src="/image/coomon.jpg" class="rounded-circle card-img-profile" alt="Card image"> by ${post.user.username}</a>
-          <button>
-         </button>
+          <div class="card-profile">
+            <div class="mx-1">
+              count
+            </div>
+            <div class="mx-1">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+          </div>
         </div>        
       </div>
     </div>`;
@@ -134,12 +134,8 @@
 
   list("");
 
-
-
 </script>
 
 <!-- 컨테이너 끝 -->
-
-
 
 {{> /layout/footer}}
