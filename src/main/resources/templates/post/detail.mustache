@@ -7,7 +7,7 @@
     <div class="box-form4">
         <div class="col-sm-6 px-1">
             <div class="blog-flex-start">
-                <span onclick="location.href='/user/other-blog/{{post.user.id}}' ">카테고리 자리</span>
+                <span onclick="location.href='/user/other-blog/{{post.user.id}}' ">{{post.category.title}} </span>
             </div>
             <div class="blog-flex-start  pt-4">
                 <h1 class="card-title">{{post.title}}</h1>
@@ -19,17 +19,26 @@
                     <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
                     <span>{{post.user.createDate}}</span>
                     <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+                    {{#secret}}
                     <span class="badge bg-dark"><i class="fa-solid fa-lock"
                             style="color: white;"></i>&nbsp;&nbsp;비공개</span>
+                    {{/secret}}
+                    {{^secret}}
+                    <span class="badge bg-dark"><i class="fa-solid fa-lock"
+                            style="color: white;"></i>&nbsp;&nbsp;공개</span>
+                    {{/secret}}
                 </div>
-                {{#pageOwner}}
                 <div class="blog-flex-end">
+                    {{#pageOwner}}
                     <button class="blog-update-delete"
                         onclick="location.href='/s/post/{{post.id}}/updateForm' ">수정</button>
                     <!-- Button to Open the Modal -->
                     <button class="blog-update-delete" data-bs-toggle="modal" data-bs-target="#myModal">삭제</button>
+                    {{/pageOwner}}
+
                 </div>
-                {{/pageOwner}}
+
+
             </div>
         </div>
     </div>
@@ -159,6 +168,8 @@
                     </div>
                     <hr />
                     {{/comments}}
+
+
 
                 </ul>
             </div>

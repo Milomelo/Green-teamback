@@ -51,6 +51,7 @@ public class PostService {
     }
 
     public List<Category> 게시글쓰기화면(Integer userId) {
+
         return categoryRepository.findByUserId(userId);
         // return categoryRepository.findAll();
     }

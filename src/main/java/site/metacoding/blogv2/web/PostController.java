@@ -2,7 +2,6 @@ package site.metacoding.blogv2.web;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -108,33 +107,24 @@ public class PostController {
 
             comments.add(dto);
         }
+
+        if (postEntity.getSecret().equals("1")) {
+            model.addAttribute("secret", true);
+
+        } else {
+            model.addAttribute("secret", false);
+
+        }
+
         if (principal != null) {
 
             if (principal.getId() == postEntity.getUser().getId()) {
-
-                if (postEntity.getSecret().equals("1")) {
-
-                    model.addAttribute("secret", false);
-
-                } else {
-
-                    model.addAttribute("all", true);
-
-                }
-
-            }
-
-        } else {
-
-            if (postEntity.getSecret().equals("1")) {
-
-                model.addAttribute("secret", true);
-
+                model.addAttribute("pageOwner", true);
             } else {
-
-                model.addAttribute("all", true);
-
+                model.addAttribute("pageOwner", false);
             }
+        } else {
+            model.addAttribute("pageOwner", false);
 
         }
 
@@ -142,6 +132,7 @@ public class PostController {
         model.addAttribute("post", postEntity);
 
         return "/post/detail";
+
     }
 
     @DeleteMapping("/s/post/{id}")
