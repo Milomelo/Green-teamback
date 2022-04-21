@@ -12,6 +12,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
+    @Query(value = "SELECT * FROM post WHERE userId = :userId AND categoryId = :categoryId", nativeQuery = true)
+    List<Post> findByUserIdAndCategoryId(@Param("userId") Integer userId, @Param("categoryId") Integer categoryId);
+
     @Query(value = "SELECT * FROM post WHERE secret= '0' AND title like %:keyword%", nativeQuery = true)
     Page<Post> findByTitleContaining(@Param("keyword") String keyword, Pageable pageable);
 

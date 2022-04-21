@@ -1,5 +1,7 @@
 package site.metacoding.blogv2.service;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +35,14 @@ public class PostService {
     @Transactional
     public void 글쓰기(Post post, User principal, PostWriteReqDto postWriteReqDto) {
 
-        String thumnail = UtilFileUpload.write(uploadFolder, postWriteReqDto.getThumnailFile());
+        String thumnail = null;
+        if (postWriteReqDto.getThumnailFile().isEmpty()) {
+            thumnail = "1.png";
+
+        }
+        if (!postWriteReqDto.getThumnailFile().isEmpty()) {
+            thumnail = UtilFileUpload.write(uploadFolder, postWriteReqDto.getThumnailFile());
+        }
 
         // 2. 카테고리 있는지 확인
         Optional<Category> categoryOp = categoryRepository.findById(postWriteReqDto.getCategoryId());
@@ -60,11 +69,21 @@ public class PostService {
         return postRepository.findByTitleContaining(keyword, pageable);
     }
 
-    public PostRespDto 게시글목록보기(int userId) {
+    public PostRespDto 게시글목록보기(Integer userId) {
         List<Post> postsEntity = postRepository.findByUserId(userId);
         List<Category> categorysEntity = categoryRepository.findByUserId(userId);
 
         PostRespDto postRespDto = new PostRespDto(postsEntity, categorysEntity);
+        return postRespDto;
+    }
+
+    public PostRespDto 게시글카테고리별보기(Integer userId, Integer categoryId) {
+        List<Post> postsEntity = postRepository.findByUserIdAndCategoryId(userId, categoryId);
+        List<Category> categorysEntity = categoryRepository.findByUserId(userId);
+
+        PostRespDto postRespDto = new PostRespDto(
+                postsEntity,
+                categorysEntity);
         return postRespDto;
     }
 
