@@ -1,5 +1,10 @@
 package site.metacoding.blogv2.web;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.UUID;
+
+import javax.persistence.criteria.Path;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +22,7 @@ import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.domain.user.UserRepository;
 import site.metacoding.blogv2.service.PostService;
 import site.metacoding.blogv2.service.UserService;
+import site.metacoding.blogv2.web.dto.JoinReqDto;
 import site.metacoding.blogv2.web.dto.PostRespDto;
 
 @RequiredArgsConstructor
