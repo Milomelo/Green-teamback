@@ -37,7 +37,9 @@ public class PostService {
 
         // 2. 카테고리 있는지 확인
         Optional<Category> categoryOp = categoryRepository.findById(postWriteReqDto.getCategoryId());
-
+        if (postWriteReqDto.getSecret() == null) {
+            postWriteReqDto.setSecret("0");
+        }
         // 3. post DB 저장
         if (categoryOp.isPresent()) {
             Post posts = postWriteReqDto.toEntity(thumnail, principal, categoryOp.get());
@@ -45,7 +47,6 @@ public class PostService {
         } else {
 
         }
-
         post.setUser(principal); // User FK 추가!!
     }
 

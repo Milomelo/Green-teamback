@@ -44,7 +44,7 @@ public class PostController {
 
     // 글쓰기
     @GetMapping("/s/post/{id}/write-form")
-    public String postForm(Model model, @PathVariable Integer id) {
+    public String postForm(Model model, @PathVariable Integer id, PostWriteReqDto postWriteReqDto) {
 
         User pri = (User) session.getAttribute("principal");
         List<Category> categorys = categoryRepository.findByUserId(id);
@@ -69,11 +69,6 @@ public class PostController {
 
         if (session.getAttribute("principal") == null) {
             return "redirect:/login-form";
-        }
-        if (post.getSecret() == null) {
-            post.setSecret("0");
-        } else {
-
         }
 
         User principal = (User) session.getAttribute("principal");
