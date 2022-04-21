@@ -47,7 +47,6 @@ public class PostService {
         }
 
         post.setUser(principal); // User FK 추가!!
-        postRepository.save(post);
     }
 
     public List<Category> 게시글쓰기화면(Integer userId) {

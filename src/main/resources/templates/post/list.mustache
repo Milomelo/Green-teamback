@@ -103,7 +103,7 @@
         <div class="card-body">
         <h4 class="card-title">${post.title}</h4>
         <p class="card-text">${post.content}</p>
-        <p>작성일${post.createDate} · 댓글수 ${post.comments.length} </p>
+        <p>작성일${post.formatCreateDate} · 댓글수 ${post.comments.length} </p>
         <div class="card-profile">
           <a href="/user/other-blog/${post.user.id}" class="card-link my-link"><img src="/image/coomon.jpg" class="rounded-circle card-img-profile" alt="Card image"> by ${post.user.username}</a>
           <div class="card-profile">

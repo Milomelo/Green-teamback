@@ -1,6 +1,7 @@
 package site.metacoding.blogv2.domain.post;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -73,8 +74,13 @@ public class Post {
     private String secret;
 
     @CreatedDate // insert 할때만 동작
-    private LocalDate createDate;
+    private LocalDateTime createDate;
     @LastModifiedDate // update 할때만 동작
-    private LocalDate updateDate;
+    private LocalDateTime updateDate;
 
+    // yyyy-MM-dd HH:mm:ss
+    public String getFormatCreateDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return createDate.format(formatter);
+    }
 }
