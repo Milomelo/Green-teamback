@@ -66,15 +66,30 @@ public class UserService {
     @Transactional
     public void 회원수정(Integer id, UpdateDto updateDto) {
         // UPDATE user SET password = ?, email = ?, addr = ? WHERE id = ?
+        System.out.println("여기까지이이지지지2");
+
         Optional<User> userOp = userRepository.findById(id); // 영속화 (디비 row를 영속성 컨텍스에 옮김)
+        String profile = null;
+
+        if (updateDto.getProfilefFile().isEmpty()) {
+            profile = "coomon.jpg";
+
+        }
+        if (!updateDto.getProfilefFile().isEmpty()) {
+            profile = UtilFileUpload.write(uploadFolder, updateDto.getProfilefFile());
+
+        }
 
         if (userOp.isPresent()) {
             // 영속화된 오브젝트 수정
+
             User userEntity = userOp.get();
             userEntity.setBlogname(updateDto.getBlogname());
             userEntity.setPassword(updateDto.getPassword());
             userEntity.setEmail(updateDto.getEmail());
             userEntity.setBlogtitle(updateDto.getBlogtitle());
+            userEntity.setProfile(profile);
+
         } else {
             throw new RuntimeException("아이디를 찾을 수 없습니다.");
         }

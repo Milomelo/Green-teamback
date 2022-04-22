@@ -1,0 +1,127 @@
+{{> /layout/header}}
+
+<!-- 컨테이너 시작 -->
+<div class="container">
+
+  <!-- 블로그 폼 시작 -->
+  <div>
+
+    <!-- 블로그 맨 위 소개 시작-->
+    {{#user}}
+    <div class="blog-flex-center">
+      <div class="col-sm-6">
+        <div class="blog-flex-start blog-profile">
+          <div class="my-mlr blog-profile-img">
+            <img src="/green/profile/{{profile}}" alt="Profile" class="rounded-circle profile">
+          </div>
+          <div class="my-mlr">
+            <div class="blog-user">{{blogname}}</div>
+            <div>{{blogtitle}}</div>
+            <div>{{username}}</div>
+            {{/user}}
+          </div>
+        </div>
+        <hr />
+      </div>
+    </div>
+    <!-- 블로그 맨 위 소개 끝-->
+
+    <!-- 블로그 내 검색 시작-->
+    <div class="my-mtb blog-flex-end">
+      <div class="blog-search">
+        <div class="blog-search-input-form" style="margin-top: 12px;">
+          <input id="mykeyword" name="mykeyword" type="text" placeholder="검색어를 입력하세요">
+          <button id="mybtn-search" class="blog-search-icon" type="button"><i
+              class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+      </div>
+    </div>
+    <!-- 블로그 내 검색 끝-->
+
+    <!-- 블로그 본문 시작-->
+    <div class="row my-mtb blog-flex-around">
+
+      <!-- 블로그 카테고리 시작-->
+      <div class="col-sm-3 blog-flex-end">
+        <div class="blog-category">
+          <div class="box-form3">
+            <div>
+              &nbsp;&nbsp;&nbsp;카테고리 목록
+            </div>
+            <div>
+              <button class="blog-update-delete" onclick="location.href='/s/category/writeForm' "><i
+                  class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+          <hr />
+          <div>
+            <div class="list-group">
+              <ul class="category-list" style="list-style: none; float: left;">
+                {{#postRespDto.categorys}}
+                <li>
+                  <a class="list-group-item list-group-item-action"
+                    href="/user/{{user.id}}/category{{id}}">{{title}}</a>
+                </li>
+                {{/postRespDto.categorys}}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 블로그 카테고리 끝-->
+
+      <!-- 블로그 포스트 시작-->
+      <input type="hidden" id="userId" value="{{userId}}">
+
+
+
+      {{#categoryRespDto.posts}}
+      <div class="my-mb blog-flex-center">
+        <div class="blog-card">
+          <img class="card-img-top" src="/image/Very_Peri.jpg" alt="Card image">
+          <div class="card-body">
+            <h4 class="card-title"><a href="/post/{{id}}"> {{title}}</h4>
+            <p class="card-text">{{content}}</p>
+            <p>{{formatCreateDate}} · 댓글수 {{comments.size}}</p>
+            {{/categoryRespDto.posts}}
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+    <!-- 블로그 포스트 끝-->
+
+    <!-- 블로그 빈칸 시작-->
+    <div class="col-sm-3 blog-box"></div>
+    <!-- 블로그 빈칸 끝-->
+
+  </div>
+  <!-- 블로그 본문 끝-->
+
+  <!-- 페이징 시작 -->
+  <ul class="pagination modal-3">
+    <li><a href="#" class="prev"><i class="fa fa-chevron-left"></i></a></li>
+    <li><a href="#" class="active">1</a></li>
+    <li> <a href="#">2</a></li>
+    <li> <a href="#">3</a></li>
+    <li> <a href="#">4</a></li>
+    <li> <a href="#">5</a></li>
+    <li> <a href="#">6</a></li>
+    <li> <a href="#">7</a></li>
+    <li> <a href="#">8</a></li>
+    <li> <a href="#">9</a></li>
+    <li><a href="#" class="next"><i class="fa fa-chevron-right"></i></a></li>
+  </ul>
+  <!-- 페이징 끝 -->
+
+</div>
+<!-- 블로그 폼 끝 -->
+
+</div>
+<!-- 컨테이너 끝 -->
+
+
+{{> /layout/footer}}

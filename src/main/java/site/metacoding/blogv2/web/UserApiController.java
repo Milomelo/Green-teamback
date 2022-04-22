@@ -27,6 +27,7 @@ public class UserApiController {
 
     @PutMapping("/s/api/user/update/{id}")
     public ResponseDto<?> update(@PathVariable Integer id, @RequestBody UpdateDto updateDto) {
+        System.out.println("여기까지이이지지지");
         userService.회원수정(id, updateDto);
         return new ResponseDto<>(1, "성공", null);
     }

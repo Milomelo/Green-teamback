@@ -19,6 +19,7 @@ import site.metacoding.blogv2.domain.post.PostRepository;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.domain.user.UserRepository;
 import site.metacoding.blogv2.domain.util.UtilFileUpload;
+import site.metacoding.blogv2.web.dto.CategoryRespDto;
 import site.metacoding.blogv2.web.dto.PostRespDto;
 import site.metacoding.blogv2.web.dto.PostWriteReqDto;
 
@@ -77,14 +78,11 @@ public class PostService {
         return postRespDto;
     }
 
-    public PostRespDto 게시글카테고리별보기(Integer userId, Integer categoryId) {
+    public CategoryRespDto 게시글카테고리별보기(Integer userId, Integer categoryId) {
         List<Post> postsEntity = postRepository.findByUserIdAndCategoryId(userId, categoryId);
-        List<Category> categorysEntity = categoryRepository.findByUserId(userId);
-
-        PostRespDto postRespDto = new PostRespDto(
-                postsEntity,
-                categorysEntity);
-        return postRespDto;
+        CategoryRespDto categoryRespDto = new CategoryRespDto(
+                postsEntity);
+        return categoryRespDto;
     }
 
     public Post 글상세보기(Integer id) {

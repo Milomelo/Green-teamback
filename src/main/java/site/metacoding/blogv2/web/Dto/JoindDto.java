@@ -1,7 +1,5 @@
 package site.metacoding.blogv2.web.dto;
 
-import javax.mail.Multipart;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;

@@ -8,40 +8,37 @@
             <div class="box-form4 my-4">
                 <img src="/green/profile/{{user.profile}}" class="rounded-circle" width="160px" height="160px">
             </div>
-            fdsafdsafsd
             <div class="box-form4 my-4">
-                <div class="image-upload-btn" onclick="onclick=document.all.file.click()">이미지 업로드
-                    <form action="/upload" method="post" enctype="multipart/form-data">
-                        <input type="file" name="file" id="file" style="display:none">
-                        <br />
-                    </form>
-                </div>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="profilefFile" id="profile" placeholder="Choose file">
+                    <br />
+                </form>
             </div>
         </div>
-        <div class="mx-4 vl"></div>
-        <div class="box-form4 flex-grow-1">
-            <form class="my-3">
-                <div class="box-form6">
-                    <input type="hidden" id="id" value="{{user.id}}">
-                    <input type="text" class="form-control update-input-form" value="{{user.username}}" id="username"
-                        placeholder="username" maxlength="20" readonly>
-                    <input type="text" class="form-control update-input-form" value="{{user.blogname}}" id="blogname"
-                        placeholder="blogname" maxlength="20" required>
-                    <input type="text" class="form-control update-input-form" id="blogtitle" placeholder="blogtitle"
-                        maxlength="100" value="{{user.blogtitle}}">
-                    <input type="password" class="form-control update-input-form" value="{{user.password}}"
-                        id="password" placeholder="Password" maxlength="20" id="password" required>
-                    <input type="email" class="form-control update-input-form" value="{{user.email}}" id="email"
-                        placeholder="E-mail" maxlength="60" id="email" required>
-                </div>
-
-                <div class="blog-flex-end">
-                    <button id="btn-updateUse" type="button" class="btn" onclick="updateUser()">수정하기</button>
-                </div>
-            </form>
-        </div>
     </div>
-    <!-- 유저수정 폼 끝 -->
+    <div class="mx-4 vl"></div>
+    <div class="box-form4 flex-grow-1">
+        <form class="my-3">
+            <div class="box-form6">
+                <input type="hidden" id="id" value="{{user.id}}">
+                <input type="text" class="form-control update-input-form" value="{{user.username}}" id="username"
+                    placeholder="username" maxlength="20" readonly>
+                <input type="text" class="form-control update-input-form" value="{{user.blogname}}" id="blogname"
+                    placeholder="blogname" maxlength="20" required>
+                <input type="text" class="form-control update-input-form" id="blogtitle" placeholder="blogtitle"
+                    maxlength="100" value="{{user.blogtitle}}">
+                <input type="password" class="form-control update-input-form" value="{{user.password}}" id="password"
+                    placeholder="Password" maxlength="20" id="password" required>
+                <input type="email" class="form-control update-input-form" value="{{user.email}}" id="email"
+                    placeholder="E-mail" maxlength="60" id="email" required>
+            </div>
+            <div class="blog-flex-end">
+                <button id="btn-updateUse" type="button" class="btn" onclick="updateUser()">수정하기</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 유저수정 폼 끝 -->
 </div>
 
 <script>
@@ -58,7 +55,7 @@
             blogtitle: $("#blogtitle").val(),
             password: $("#password").val(),
             email: $("#email").val(),
-            imgurl: $("#imgurl").val(),
+            profile: $("#profile").val(),
         }
 
         let response = await fetch(`/s/api/user/update/${id}`, {

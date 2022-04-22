@@ -1,10 +1,5 @@
 package site.metacoding.blogv2.web;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.UUID;
-
-import javax.persistence.criteria.Path;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,11 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.blogv2.domain.post.Post;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.domain.user.UserRepository;
 import site.metacoding.blogv2.service.PostService;
 import site.metacoding.blogv2.service.UserService;
+import site.metacoding.blogv2.web.dto.CategoryRespDto;
 import site.metacoding.blogv2.web.dto.JoindDto;
 import site.metacoding.blogv2.web.dto.PostRespDto;
 
@@ -98,6 +93,17 @@ public class UserController {
         userService.회원가입(joindDto);
 
         return "redirect:/login-form"; // 로그인페이지 이동해주는 컨트롤러 메서드를 재활용
+    }
+
+    @GetMapping("/user/{userId}/category/{categoryId}")
+    public String postList(@PathVariable Integer userId, @PathVariable Integer categoryId, Model model) {
+        // SELECT * FROM category WHERE userId = :id
+        // 카테고리 가져가세요!!
+
+        CategoryRespDto categoryRespDto = postService.게시글카테고리별보기(userId, categoryId);
+
+        model.addAttribute("categoryRespDto", categoryRespDto);
+        return "/user/category";
     }
 
     @GetMapping("/s/user/{id}")
