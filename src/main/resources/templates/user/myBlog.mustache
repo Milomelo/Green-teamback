@@ -7,14 +7,14 @@
   <div>
 
     <!-- 블로그 맨 위 소개 시작-->
+    {{#user}}
     <div class="blog-flex-center">
       <div class="col-sm-6">
         <div class="blog-flex-start blog-profile">
           <div class="my-mlr blog-profile-img">
-            <img src="/image/coomon.jpg" alt="Profile" class="rounded-circle profile">
+            <img src="/green/profile/{{profile}}" alt="Profile" class="rounded-circle profile">
           </div>
           <div class="my-mlr">
-            {{#user}}
             <div class="blog-user">{{blogname}}</div>
             <div>{{blogtitle}}</div>
             <div>{{username}}</div>

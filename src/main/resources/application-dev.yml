@@ -47,4 +47,11 @@ spring:
       enabled: always
 
 file:
-  path: C:/Users/green/upload/      
+  path: C:/Users/green/  
+
+
+thumnailfile:
+  path: C:/Users/green/upload/   
+
+profilePath:
+    path: C:/Users/green/profile/      

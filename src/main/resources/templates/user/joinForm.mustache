@@ -5,7 +5,7 @@
     <div class="my-2 brand-logo" onclick="location.href='/'">
         글하다
     </div>
-    <form action="/join" method="post">
+    <form action="/join" method="post" enctype="multipart/form-data">
         <div class="my-2">
             <input type="text" class="form-control input-form" placeholder="ID" name="username" id="username"
                 maxlength="20" required />
@@ -27,6 +27,7 @@
 
         <div class="box-form3 my-3">
             <button type="button" class="cancel-btn" onclick="location.href='/login-form'">나가기</button>
+            <input type="file" name="profilefFile" id="profile" placeholder="Choose file">
             <button type="submit" class="submit-btn">회원가입</button>
         </div>
     </form>

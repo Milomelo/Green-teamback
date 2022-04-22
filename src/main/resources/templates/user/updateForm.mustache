@@ -6,9 +6,9 @@
     <div class="box-form5 my-4">
         <div class="col-sm-3">
             <div class="box-form4 my-4">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdUZ_9tEpmdSFXY_yLnlAe6qR4yZ8Czl2mvw&usqp=CAU"
-                    class="rounded-circle" width="160px" height="160px">
+                <img src="/green/profile/{{user.profile}}" class="rounded-circle" width="160px" height="160px">
             </div>
+            fdsafdsafsd
             <div class="box-form4 my-4">
                 <div class="image-upload-btn" onclick="onclick=document.all.file.click()">이미지 업로드
                     <form action="/upload" method="post" enctype="multipart/form-data">
@@ -34,6 +34,7 @@
                     <input type="email" class="form-control update-input-form" value="{{user.email}}" id="email"
                         placeholder="E-mail" maxlength="60" id="email" required>
                 </div>
+
                 <div class="blog-flex-end">
                     <button id="btn-updateUse" type="button" class="btn" onclick="updateUser()">수정하기</button>
                 </div>

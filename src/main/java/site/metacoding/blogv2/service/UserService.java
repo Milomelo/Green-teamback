@@ -14,15 +14,30 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.domain.user.UserRepository;
+import site.metacoding.blogv2.domain.util.UtilFileUpload;
+import site.metacoding.blogv2.web.dto.JoindDto;
 import site.metacoding.blogv2.web.dto.UpdateDto;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
+    @Value("${profilePath.path}")
+    private String uploadFolder;
+
     private final UserRepository userRepository;
 
     @Transactional
-    public void 회원가입(User user) {
+    public void 회원가입(JoindDto joindDto) {
+
+        String profile = null;
+        if (joindDto.getProfilefFile().isEmpty()) {
+            profile = "coomon.jpg";
+
+        }
+        if (!joindDto.getProfilefFile().isEmpty()) {
+            profile = UtilFileUpload.write(uploadFolder, joindDto.getProfilefFile());
+        }
+        User user = joindDto.toEntity(profile);
 
         userRepository.save(user);
     }
@@ -42,6 +57,7 @@ public class UserService {
     }
 
     public User 회원아이디불러오기(Integer id) {
+
         Optional<User> userOp = userRepository.findById(id);
 
         return userOp.get();

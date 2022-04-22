@@ -29,7 +29,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final CategoryRepository categoryRepository;
 
-    @Value("${file.path}")
+    @Value("${thumnailfile.path}")
     private String uploadFolder;
 
     @Transactional

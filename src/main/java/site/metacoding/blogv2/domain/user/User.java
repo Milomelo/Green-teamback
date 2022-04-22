@@ -41,6 +41,8 @@ public class User {
     @Column(length = 60, nullable = false)
     private String email;
 
+    private String profile;
+
     private String blogname;
 
     @Column(nullable = true)
